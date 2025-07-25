@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currículum Profesional</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    .container {
+      display: flex;
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .main {
+      width: 65%;
+      padding: 40px;
+      background-color: #fff;
+    }
+
+    .sidebar {
+      width: 35%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 40px 30px;
+      color: white;
+    }
+
+    .header {
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      margin: 0 0 5px 0;
+      font-size: 32px;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+
+    h1 input {
+      font-size: 32px;
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-weight: 700;
+      color: #2c3e50;
+      font-family: inherit;
+    }
+
+    .job-title {
+      font-size: 18px;
+      color: #7f8c8d;
+      margin-bottom: 20px;
+    }
+
+    .job-title input {
+      font-size: 18px;
+      width: 100%;
+      border: none;
+      background: transparent;
+      color: #7f8c8d;
+      font-family: inherit;
+    }
+
+    h2 {
+      color: #2c3e50;
+      font-size: 22px;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 8px;
+      margin: 30px 0 20px 0;
+    }
+
+    h3 {
+      color: white;
+      font-size: 18px;
+      margin: 25px 0 15px 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section {
+      margin-bottom: 25px;
+    }
+
+    input, textarea {
+      width: 100%;
+      border: none;
+      background: transparent;
+      border-bottom: 2px solid #ecf0f1;
+      font-size: 14px;
+      padding: 8px 2px;
+      margin-bottom: 12px;
+      resize: vertical;
+      font-family: inherit;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-bottom-color: #3498db;
+    }
+
+    .sidebar input {
+      border-bottom: 2px solid rgba(255,255,255,0.3);
+      color: white;
+    }
+
+    .sidebar input:focus {
+      border-bottom-color: rgba(255,255,255,0.8);
+    }
+
+    .sidebar input::placeholder {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .profile-section {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .profile-img-container {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(255,255,255,0.3);
+      transition: transform 0.3s;
+    }
+
+    .profile-img:hover {
+      transform: scale(1.05);
+    }
+
+    .upload-btn {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 35px;
+      height: 35px;
+      background: #3498db;
+      border-radius: 50%;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+
+    .upload-btn:hover {
+      background: #2980b9;
+    }
+
+    #photo-upload {
+      display: none;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .contact-icon {
+      width: 20px;
+      margin-right: 12px;
+      text-align: center;
+    }
+
+    .skill-item {
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .skill-name {
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .skill-bar {
+      height: 6px;
+      background-color: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%);
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+
+    .skill-delete {
+      position: absolute;
+      right: 0;
+      top: 0;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      font-size: 12px;
+      display: none;
+    }
+
+    .skill-item:hover .skill-delete {
+      display: block;
+    }
+
+    .language-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .language-level {
+      font-size: 12px;
+      background: rgba(255,255,255,0.2);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .language-delete {
+      position: absolute;
+      right: -25px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      font-size: 12px;
+      display: none;
+    }
+
+    .language-item:hover .language-delete {
+      display: block;
+    }
+
+    .experience-item, .education-item {
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #ecf0f1;
+      position: relative;
+    }
+
+    .experience-item:last-child, .education-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .company-role input {
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .date-location {
+      font-size: 13px;
+      color: #7f8c8d;
+      min-width: 200px;
+      text-align: right;
+    }
+
+    .delete-item {
+      position: absolute;
+      right: 0;
+      top: 0;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+      font-size: 12px;
+      display: none;
+    }
+
+    .experience-item:hover .delete-item,
+    .education-item:hover .delete-item {
+      display: block;
+    }
+
+    .btn-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin: 5px;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      color: #2c3e50;
+    }
+
+    .btn-pdf {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+      color: white;
+    }
+
+    .btn-email {
+      background: linear-gradient(135deg, #4834d4 0%, #686de0 100%);
+      color: white;
+    }
+
+    .add-btn {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      margin: 10px 0;
+      transition: background-color 0.3s;
+    }
+
+    .add-btn:hover {
+      background: #219a52;
+    }
+
+    .email-config {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .email-config label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .email-config input {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 4px;
+      padding: 8px;
+      color: white;
+      font-size: 13px;
+    }
+
+    .loading-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loading-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 300px;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .template-selector {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .template-selector label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .template-selector select {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 4px;
+      padding: 8px;
+      color: white;
+      font-size: 13px;
+      width: 100%;
+    }
+
+    .progress-indicator {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255,255,255,0.9);
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-size: 12px;
+      z-index: 999;
+      display: none;
+    }
+
+    /* Estilos para impresión PDF */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+        font-size: 12px;
+        line-height: 1.4;
+      }
+      
+      .container {
+        box-shadow: none;
+        border-radius: 0;
+        max-width: none;
+        display: flex;
+        margin: 0;
+      }
+      
+      .main {
+        width: 65%;
+        padding: 20px;
+      }
+      
+      .sidebar {
+        width: 35%;
+        padding: 20px;
+        background: #667eea !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      
+      input, textarea {
+        border: none !important;
+        background: none !important;
+        color: black !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        font-size: inherit !important;
+      }
+      
+      .sidebar input {
+        color: white !important;
+      }
+      
+      .sidebar input::placeholder {
+        color: transparent !important;
+      }
+      
+      .btn, .add-btn, .upload-btn, .delete-item, .skill-delete, .language-delete {
+        display: none !important;
+      }
+      
+      .profile-img-container:hover .upload-btn {
+        display: none !important;
+      }
+
+      .email-config, .template-selector {
+        display: none !important;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+
+      h2 {
+        font-size: 18px;
+        margin: 20px 0 15px 0;
+      }
+
+      h3 {
+        font-size: 16px;
+        margin: 20px 0 10px 0;
+      }
+
+      .skill-range {
+        display: none !important;
+      }
+
+      .profile-img {
+        width: 100px;
+        height: 100px;
+      }
+
+      .experience-item, .education-item {
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+      }
+
+      .btn-container {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      
+      .main, .sidebar {
+        width: 100%;
+      }
+      
+      .item-header {
+        flex-direction: column;
+      }
+      
+      .date-location {
+        text-align: left;
+        margin-top: 5px;
+      }
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <!-- Modal de carga -->
+  <div class="loading-modal" id="loadingModal">
+    <div class="loading-content">
+      <div class="spinner"></div>
+      <p>Generando PDF...</p>
+      <p style="font-size: 12px; color: #666;">Por favor espera un momento</p>
+    </div>
+  </div>
+
+  <!-- Indicador de progreso -->
+  <div class="progress-indicator" id="progressIndicator">
+    Completado: <span id="progressPercent">0</span>%
+  </div>
+
+  <div class="container" id="curriculum-content">
+    <div class="main">
+      <div class="header">
+        <h1><input type="text" placeholder="Tu Nombre Completo" id="fullName" onchange="updateProgress()"></h1>
+        <div class="job-title">
+          <input type="text" placeholder="Título Profesional o Puesto Deseado" id="jobTitle" onchange="updateProgress()">
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>👤 Perfil Profesional</h2>
+        <textarea rows="4" placeholder="Describe brevemente tu experiencia, objetivos profesionales y lo que te hace único como candidato..." id="profile" onchange="updateProgress()"></textarea>
+      </div>
+
+      <div class="section">
+        <h2>💼 Experiencia Profesional</h2>
+        <div id="experienceContainer">
+          <div class="experience-item">
+            <button class="delete-item" onclick="deleteExperience(this)" title="Eliminar">×</button>
+            <div class="item-header">
+              <div class="company-role">
+                <input type="text" placeholder="Empresa - Cargo" class="company-input" onchange="updateProgress()">
+              </div>
+              <div class="date-location">
+                <input type="text" placeholder="Ciudad, País | MM/AAAA - MM/AAAA" class="date-input">
+              </div>
+            </div>
+            <textarea rows="3" placeholder="• Responsabilidades principales&#10;• Logros destacados&#10;• Proyectos relevantes" class="description-input"></textarea>
+          </div>
+        </div>
+        <button class="add-btn" onclick="addExperience()">+ Agregar Experiencia</button>
+      </div>
+
+      <div class="section">
+        <h2>🎓 Educación</h2>
+        <div id="educationContainer">
+          <div class="education-item">
+            <button class="delete-item" onclick="deleteEducation(this)" title="Eliminar">×</button>
+            <div class="item-header">
+              <div class="company-role">
+                <input type="text" placeholder="Título - Universidad/Institución" class="degree-input" onchange="updateProgress()">
+              </div>
+              <div class="date-location">
+                <input type="text" placeholder="Ciudad, País | AAAA" class="edu-date-input">
+              </div>
+            </div>
+            <textarea rows="2" placeholder="Especialización, promedio, proyectos destacados (opcional)" class="edu-description-input"></textarea>
+          </div>
+        </div>
+        <button class="add-btn" onclick="addEducation()">+ Agregar Educación</button>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="profile-section">
+        <div class="profile-img-container">
+          <img class="profile-img" src="https://via.placeholder.com/120/667eea/ffffff?text=FOTO" alt="Foto de perfil" id="profileImage">
+          <button class="upload-btn" onclick="document.getElementById('photo-upload').click()" title="Cambiar foto">
+            📷
+          </button>
+          <input type="file" id="photo-upload" accept="image/*" onchange="loadPhoto(event)">
+        </div>
+      </div>
+
+      <h3>📞 Contacto</h3>
+      <div class="contact-item">
+        <span class="contact-icon">📱</span>
+        <input type="tel" placeholder="Número de teléfono" id="phone" onchange="updateProgress()">
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">✉️</span>
+        <input type="email" placeholder="correo@ejemplo.com" id="email" onchange="updateProgress()">
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <input type="text" placeholder="Ciudad, País" id="location">
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">💼</span>
+        <input type="text" placeholder="LinkedIn/Portfolio (opcional)" id="linkedin">
+      </div>
+
+      <h3>🔧 Habilidades Técnicas</h3>
+      <div id="skillsContainer">
+        <div class="skill-item">
+          <button class="skill-delete" onclick="deleteSkill(this)" title="Eliminar">×</button>
+          <div class="skill-name">
+            <input type="text" placeholder="Nombre de la habilidad" class="skill-name-input" onchange="updateSkillName(this)">
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="width: 80%"></div>
+          </div>
+          <input type="range" min="0" max="100" value="80" class="skill-range" onchange="updateSkillLevel(this)" style="width: 100%; margin-top: 5px;">
+        </div>
+      </div>
+      <button class="add-btn" onclick="addSkill()">+ Agregar Habilidad</button>
+
+      <h3>🌐 Idiomas</h3>
+      <div id="languagesContainer">
+        <div class="language-item">
+          <button class="language-delete" onclick="deleteLanguage(this)" title="Eliminar">×</button>
+          <input type="text" placeholder="Idioma" value="Español" class="language-input" style="width: 60%;">
+          <select class="language-level" style="background: rgba(255,255,255,0.2); border: none; color: white;">
+            <option value="Nativo">Nativo</option>
+            <option value="Avanzado">Avanzado</option>
+            <option value="Intermedio">Intermedio</option>
+            <option value="Básico">Básico</option>
+          </select>
+        </div>
+      </div>
+      <button class="add-btn" onclick="addLanguage()">+ Agregar Idioma</button>
+
+      <div class="template-selector">
+        <label>🎨 Plantilla de colores:</label>
+        <select id="colorTemplate" onchange="changeColorTemplate()">
+          <option value="default">Azul-Morado (Predeterminado)</option>
+          <option value="green">Verde Profesional</option>
+          <option value="orange">Naranja Moderno</option>
+          <option value="purple">Morado Elegante</option>
+        </select>
+      </div>
+
+      <div class="email-config">
+        <label>📧 Correo de destino:</label>
+        <input type="email" id="destinationEmail" value="rrhh@empresa.com" placeholder="correo@empresa.com">
+      </div>
+
+      <div class="btn-container">
+        <button class="btn btn-pdf" onclick="downloadPDF()">📄 Descargar PDF</button>
+        <button class="btn btn-email" onclick="generateAndSendPDF()">📧 Enviar por Correo</button>
+        <button class="btn btn-secondary" onclick="printCV()">🖨️ Imprimir</button>
+        <button class="btn btn-secondary" onclick="saveData()">💾 Guardar</button>
+        <button class="btn btn-secondary" onclick="loadData()">📂 Cargar</button>
+        <button class="btn btn-secondary" onclick="clearAll()">🗑️ Limpiar Todo</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Cargar foto de perfil
+    function loadPhoto(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('profileImage').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Función mejorada para descargar PDF
+    function downloadPDF() {
+      const name = document.getElementById('fullName').value;
+      
+      if (!name.trim()) {
+        alert('Por favor completa al menos tu nombre antes de generar el PDF.');
+        return;
+      }
+
+      showLoadingModal();
+
+      const element = document.getElementById('curriculum-content');
+      const opt = {
+        margin: [0.5, 0.5, 0.5, 0.5],
+        filename: `CV_${name.replace(/\s+/g, '_')}_${new Date().getFullYear()}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+          scale: 2,
+          useCORS: true,
+          letterRendering: true,
+          allowTaint: true
+        },
+        jsPDF: { 
+          unit: 'in', 
+          format: 'a4', 
+          orientation: 'portrait' 
+        }
+      };
+
+      html2pdf().set(opt).from(element).save().then(() => {
+        hideLoadingModal();
+        showSuccessMessage('PDF descargado exitosamente');
+      }).catch((error) => {
+        hideLoadingModal();
+        console.error('Error al generar PDF:', error);
+        alert('Hubo un error al generar el PDF. Intenta usar la opción de imprimir como alternativa.');
+      });
+    }
+
+    function printCV() {
+      const name = document.getElementById('fullName').value;
+      
+      if (!name.trim()) {
+        alert('Por favor completa al menos tu nombre antes de imprimir.');
+        return;
+      }
+
+      const originalTitle = document.title;
+      document.title = `CV_${name.replace(/\s+/g, '_')}_${new Date().getFullYear()}`;
+      
+      window.print();
+      
+      setTimeout(() => {
+        document.title = originalTitle;
+      }, 1000);
+    }
+
+    function showLoadingModal() {
+      document.getElementById('loadingModal').style.display = 'flex';
+    }
+
+    function hideLoadingModal() {
+      document.getElementById('loadingModal').style.display = 'none';
+    }
+
+    function showSuccessMessage(message) {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #27ae60;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 5px;
+        z-index: 1001;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      `;
+      notification.textContent = message;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        if (document.body.contains(notification)) {
+          document.body.removeChild(notification);
+        }
+      }, 3000);
+    }
+
+    // Funciones para agregar elementos
+    function addExperience() {
+      const container = document.getElementById('experienceContainer');
+      const newItem = document.createElement('div');
+      newItem.className = 'experience-item';
+      newItem.innerHTML = `
+        <button class="delete-item" onclick="deleteExperience(this)" title="Eliminar">×</button>
+        <div class="item-header">
+          <div class="company-role">
+            <input type="text" placeholder="Empresa - Cargo" class="company-input" onchange="updateProgress()">
+          </div>
+          <div class="date-location">
+            <input type="text" placeholder="Ciudad, País | MM/AAAA - MM/AAAA" class="date-input">
+          </div>
+        </div>
+        <textarea rows="3" placeholder="• Responsabilidades principales&#10;• Logros destacados&#10;• Proyectos relevantes" class="description-input"></textarea>
+      `;
+      container.appendChild(newItem);
+    }
+
+    function addEducation() {
+      const container = document.getElementById('educationContainer');
+      const newItem = document.createElement('div');
+      newItem.className = 'education-item';
+      newItem.innerHTML = `
+        <button class="delete-item" onclick="deleteEducation(this)" title="Eliminar">×</button>
+        <div class="item-header">
+          <div class="company-role">
+            <input type="text" placeholder="Título - Universidad/Institución" class="degree-input" onchange="updateProgress()">
+          </div>
+          <div class="date-location">
+            <input type="text" placeholder="Ciudad, País | AAAA" class="edu-date-input">
+          </div>
+        </div>
+        <textarea rows="2" placeholder="Especialización, promedio, proyectos destacados (opcional)" class="edu-description-input"></textarea>
+      `;
+      container.appendChild(newItem);
+    }
+
+    function addSkill() {
+      const container = document.getElementById('skillsContainer');
+      const newItem = document.createElement('div');
+      newItem.className = 'skill-item';
+      newItem.innerHTML = `
+        <button class="skill-delete" onclick="deleteSkill(this)" title="Eliminar">×</button>
+        <div class="skill-name">
+          <input type="text" placeholder="Nombre de la habilidad" class="skill-name-input" onchange="updateSkillName(this)">
+        </div>
+        <div class="skill-bar">
+          <div class="skill-progress" style="width: 50%"></div>
+        </div>
+        <input type="range" min="0" max="100" value="50" class="skill-range" onchange="updateSkillLevel(this)" style="width: 100%; margin-top: 5px;">
+      `;
+      container.appendChild(newItem);
+    }
+
+    function addLanguage() {
+      const container = document.getElementById('languagesContainer');
+      const newItem = document.createElement('div');
+      newItem.className = 'language-item';
+      newItem.innerHTML = `
+        <button class="language-delete" onclick="deleteLanguage(this)" title="Eliminar">×</button>
+        <input type="text" placeholder="Idioma" class="language-input" style="width: 60%;">
+        <select class="language-level" style="background: rgba(255,255,255,0.2); border: none; color: white;">
+          <option value="Nativo">Nativo</option>
+          <option value="Avanzado">Avanzado</option>
+          <option value="Intermedio">Intermedio</option>
+          <option value="Básico">Básico</option>
+        </select>
+      `;
+      container.appendChild(newItem);
+    }
+
+    // Funciones para eliminar elementos
+    function deleteExperience(button) {
+      if (confirm('¿Estás seguro de que deseas eliminar esta experiencia?')) {
+        button.parentElement.remove();
+        updateProgress();
+      }
+    }
+
+    function deleteEducation(button) {
+      if (confirm('¿Estás seguro de que deseas eliminar esta educación?')) {
+        button.parentElement.remove();
+        updateProgress();
+      }
+    }
+
+    function deleteSkill(button) {
+      if (confirm('¿Estás seguro de que deseas eliminar esta habilidad?')) {
+        button.parentElement.remove();
+      }
+    }
+
+    function deleteLanguage(button) {
+      if (confirm('¿Estás seguro de que deseas eliminar este idioma?')) {
+        button.parentElement.remove();
+      }
+    }
+
+    // Actualizar nivel de habilidad
+    function updateSkillLevel(range) {
+      const progressBar = range.parentElement.querySelector('.skill-progress');
+      progressBar.style.width = range.value + '%';
+    }
+
+    function updateSkillName(input) {
+      // Función para futura funcionalidad si es necesaria
+    }
+
+    // Función para cambiar plantillas de colores
+    function changeColorTemplate() {
+      const template = document.getElementById('colorTemplate').value;
+      const sidebar = document.querySelector('.sidebar');
+      const buttons = document.querySelectorAll('.btn:not(.btn-secondary):not(.btn-pdf):not(.btn-email)');
+      const h2Elements = document.querySelectorAll('h2');
+      
+      // Definir colores para cada plantilla
+      const templates = {
+        default: {
+          gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          border: '#3498db'
+        },
+        green: {
+          gradient: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
+          border: '#27ae60'
+        },
+        orange: {
+          gradient: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
+          border: '#e67e22'
+        },
+        purple: {
+          gradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+          border: '#9b59b6'
+        }
+      };
+      
+      const selectedTemplate = templates[template];
+      
+      // Aplicar colores
+      sidebar.style.background = selectedTemplate.gradient;
+      buttons.forEach(btn => {
+        if (!btn.classList.contains('btn-secondary') && !btn.classList.contains('btn-pdf') && !btn.classList.contains('btn-email')) {
+          btn.style.background = selectedTemplate.gradient;
+        }
+      });
+      h2Elements.forEach(h2 => {
+        h2.style.borderBottomColor = selectedTemplate.border;
+      });
+    }
+
+    // Función de progreso de completado
+    function updateProgress() {
+      const fields = [
+        'fullName', 'jobTitle', 'profile', 'phone', 'email'
+      ];
+      
+      let filledFields = 0;
+      let totalFields = fields.length;
+      
+      // Campos principales
+      fields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field && field.value.trim() !== '') {
+          filledFields++;
+        }
+      });
+      
+      // Experiencias
+      const experiences = document.querySelectorAll('.company-input');
+      experiences.forEach(exp => {
+        if (exp.value.trim() !== '') {
+          filledFields++;
+        }
+        totalFields++;
+      });
+      
+      // Educación
+      const education = document.querySelectorAll('.degree-input');
+      education.forEach(edu => {
+        if (edu.value.trim() !== '') {
+          filledFields++;
+        }
+        totalFields++;
+      });
+      
+      const percentage = Math.round((filledFields / totalFields) * 100);
+      const progressIndicator = document.getElementById('progressIndicator');
+      const progressPercent = document.getElementById('progressPercent');
+      
+      if (percentage > 0) {
+        progressIndicator.style.display = 'block';
+        progressPercent.textContent = percentage;
+        
+        if (percentage >= 80) {
+          progressIndicator.style.background = 'rgba(39, 174, 96, 0.9)';
+          progressIndicator.style.color = 'white';
+        } else if (percentage >= 50) {
+          progressIndicator.style.background = 'rgba(243, 156, 18, 0.9)';
+          progressIndicator.style.color = 'white';
+        } else {
+          progressIndicator.style.background = 'rgba(255, 255, 255, 0.9)';
+          progressIndicator.style.color = 'black';
+        }
+      } else {
+        progressIndicator.style.display = 'none';
+      }
+    }
+
+    // Configuración del correo predeterminado
+    function getDestinationEmail() {
+      return document.getElementById('destinationEmail').value || "rrhh@empresa.com";
+    }
+
+    // Función para enviar por correo electrónico
+    function generateAndSendPDF() {
+      const name = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const destinationEmail = getDestinationEmail();
+      
+      if (!name || !email) {
+        alert('Por favor completa al menos tu nombre y correo electrónico antes de enviar.');
+        return;
+      }
+
+      if (!destinationEmail) {
+        alert('Por favor especifica un correo de destino.');
+        return;
+      }
+
+      const emailBody = createEmailBody();
+      sendByEmail(emailBody, destinationEmail);
+    }
+
+    // Crear el cuerpo del correo con la información del currículum
+    function createEmailBody() {
+      const name = document.getElementById('fullName').value || "No especificado";
+      const jobTitle = document.getElementById('jobTitle').value || "No especificado";
+      const phone = document.getElementById('phone').value || "No especificado";
+      const email = document.getElementById('email').value || "No especificado";
+      const location = document.getElementById('location').value || "No especificado";
+      const profile = document.getElementById('profile').value || "No especificado";
+
+      // Obtener experiencias
+      const experiences = [];
+      document.querySelectorAll('.experience-item').forEach(item => {
+        const company = item.querySelector('.company-input')?.value || "No especificado";
+        const dates = item.querySelector('.date-input')?.value || "No especificado";
+        const description = item.querySelector('.description-input')?.value || "No especificado";
+        if (company !== "No especificado" || dates !== "No especificado") {
+          experiences.push(`${company} | ${dates}\n${description}`);
+        }
+      });
+
+      // Obtener educación
+      const education = [];
+      document.querySelectorAll('.education-item').forEach(item => {
+        const degree = item.querySelector('.degree-input')?.value || "No especificado";
+        const eduDate = item.querySelector('.edu-date-input')?.value || "No especificado";
+        if (degree !== "No especificado" || eduDate !== "No especificado") {
+          education.push(`${degree} | ${eduDate}`);
+        }
+      });
+
+      // Obtener habilidades
+      const skills = [];
+      document.querySelectorAll('.skill-item').forEach(item => {
+        const skillName = item.querySelector('.skill-name-input')?.value;
+        const skillLevel = item.querySelector('.skill-range')?.value || "0";
+        if (skillName) {
+          skills.push(`${skillName} (${skillLevel}%)`);
+        }
+      });
+
+      // Obtener idiomas
+      const languages = [];
+      document.querySelectorAll('.language-item').forEach(item => {
+        const langName = item.querySelector('.language-input')?.value;
+        const langLevel = item.querySelector('.language-level')?.value || "No especificado";
+        if (langName) {
+          languages.push(`${langName} - ${langLevel}`);
+        }
+      });
+
+      // Construir el cuerpo del correo
+      let body = `Estimado equipo de Recursos Humanos,\n\n`;
+      body += `Adjunto mi currículum con la siguiente información:\n\n`;
+      body += `DATOS PERSONALES:\n`;
+      body += `Nombre: ${name}\n`;
+      body += `Cargo deseado: ${jobTitle}\n`;
+      body += `Teléfono: ${phone}\n`;
+      body += `Email: ${email}\n`;
+      body += `Ubicación: ${location}\n\n`;
+      body += `PERFIL PROFESIONAL:\n${profile}\n\n`;
+      
+      if (experiences.length > 0) {
+        body += `EXPERIENCIA PROFESIONAL:\n`;
+        experiences.forEach((exp, index) => {
+          body += `${index + 1}. ${exp}\n\n`;
+        });
+      }
+      
+      if (education.length > 0) {
+        body += `EDUCACIÓN:\n`;
+        education.forEach((edu, index) => {
+          body += `${index + 1}. ${edu}\n`;
+        });
+        body += `\n`;
+      }
+      
+      if (skills.length > 0) {
+        body += `HABILIDADES TÉCNICAS:\n${skills.join(', ')}\n\n`;
+      }
+      
+      if (languages.length > 0) {
+        body += `IDIOMAS:\n${languages.join(', ')}\n\n`;
+      }
+      
+      body += `Quedo atento a sus comentarios.\n\n`;
+      body += `Saludos cordiales,\n${name}`;
+
+      return body;
+    }
+
+    // Enviar por correo electrónico
+    function sendByEmail(body) {
+      const destinationEmail = getDestinationEmail();
+      const subject = encodeURIComponent(`Currículum - ${document.getElementById('fullName').value || 'Candidato'}`);
+      const emailBody = encodeURIComponent(body);
+      const mailtoLink = `mailto:${destinationEmail}?subject=${subject}&body=${emailBody}`;
+      
+      window.location.href = mailtoLink;
+      
+      setTimeout(() => {
+        alert(
+          `Se ha abierto tu cliente de correo predeterminado.\n\n` +
+          `Si no se abrió automáticamente, puedes copiar esta información:\n\n` +
+          `Para: ${destinationEmail}\n` +
+          `Asunto: ${decodeURIComponent(subject)}\n\n` +
+          `También puedes descargar el PDF usando el botón "Descargar PDF".`
+        );
+        
+        const pdfOption = confirm("¿Deseas también descargar el PDF?");
+        if (pdfOption) {
+          downloadPDF();
+        }
+      }, 1000);
+    }
+
+    // Función para guardar datos en localStorage
+    function saveData() {
+      const data = {
+        fullName: document.getElementById('fullName').value,
+        jobTitle: document.getElementById('jobTitle').value,
+        profile: document.getElementById('profile').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        location: document.getElementById('location').value,
+        linkedin: document.getElementById('linkedin').value,
+        destinationEmail: document.getElementById('destinationEmail').value,
+        profileImage: document.getElementById('profileImage').src,
+        colorTemplate: document.getElementById('colorTemplate').value,
+        experiences: [],
+        education: [],
+        skills: [],
+        languages: []
+      };
+
+      // Guardar experiencias
+      document.querySelectorAll('.experience-item').forEach(item => {
+        data.experiences.push({
+          company: item.querySelector('.company-input')?.value || '',
+          dates: item.querySelector('.date-input')?.value || '',
+          description: item.querySelector('.description-input')?.value || ''
+        });
+      });
+
+      // Guardar educación
+      document.querySelectorAll('.education-item').forEach(item => {
+        data.education.push({
+          degree: item.querySelector('.degree-input')?.value || '',
+          dates: item.querySelector('.edu-date-input')?.value || '',
+          description: item.querySelector('.edu-description-input')?.value || ''
+        });
+      });
+
+      // Guardar habilidades
+      document.querySelectorAll('.skill-item').forEach(item => {
+        data.skills.push({
+          name: item.querySelector('.skill-name-input')?.value || '',
+          level: item.querySelector('.skill-range')?.value || '50'
+        });
+      });
+
+      // Guardar idiomas
+      document.querySelectorAll('.language-item').forEach(item => {
+        data.languages.push({
+          name: item.querySelector('.language-input')?.value || '',
+          level: item.querySelector('.language-level')?.value || 'Básico'
+        });
+      });
+
+      try {
+        localStorage.setItem('cvData', JSON.stringify(data));
+        showSuccessMessage('Datos guardados exitosamente');
+      } catch (error) {
+        alert('Error al guardar los datos: ' + error.message);
+      }
+    }
+
+    // Función para cargar datos desde localStorage
+    function loadData() {
+      try {
+        const savedData = localStorage.getItem('cvData');
+        if (!savedData) {
+          alert('No hay datos guardados para cargar.');
+          return;
+        }
+
+        const data = JSON.parse(savedData);
+
+        // Cargar datos básicos
+        document.getElementById('fullName').value = data.fullName || '';
+        document.getElementById('jobTitle').value = data.jobTitle || '';
+        document.getElementById('profile').value = data.profile || '';
+        document.getElementById('phone').value = data.phone || '';
+        document.getElementById('email').value = data.email || '';
+        document.getElementById('location').value = data.location || '';
+        document.getElementById('linkedin').value = data.linkedin || '';
+        document.getElementById('destinationEmail').value = data.destinationEmail || 'rrhh@empresa.com';
+        
+        if (data.profileImage && data.profileImage !== 'https://via.placeholder.com/120/667eea/ffffff?text=FOTO') {
+          document.getElementById('profileImage').src = data.profileImage;
+        }
+
+        if (data.colorTemplate) {
+          document.getElementById('colorTemplate').value = data.colorTemplate;
+          changeColorTemplate();
+        }
+
+        // Limpiar y cargar experiencias
+        const expContainer = document.getElementById('experienceContainer');
+        expContainer.innerHTML = '';
+        data.experiences.forEach(exp => {
+          const expItem = document.createElement('div');
+          expItem.className = 'experience-item';
+          expItem.innerHTML = `
+            <button class="delete-item" onclick="deleteExperience(this)" title="Eliminar">×</button>
+            <div class="item-header">
+              <div class="company-role">
+                <input type="text" placeholder="Empresa - Cargo" class="company-input" value="${exp.company}" onchange="updateProgress()">
+              </div>
+              <div class="date-location">
+                <input type="text" placeholder="Ciudad, País | MM/AAAA - MM/AAAA" class="date-input" value="${exp.dates}">
+              </div>
+            </div>
+            <textarea rows="3" placeholder="• Responsabilidades principales&#10;• Logros destacados&#10;• Proyectos relevantes" class="description-input">${exp.description}</textarea>
+          `;
+          expContainer.appendChild(expItem);
+        });
+
+        // Limpiar y cargar educación
+        const eduContainer = document.getElementById('educationContainer');
+        eduContainer.innerHTML = '';
+        data.education.forEach(edu => {
+          const eduItem = document.createElement('div');
+          eduItem.className = 'education-item';
+          eduItem.innerHTML = `
+            <button class="delete-item" onclick="deleteEducation(this)" title="Eliminar">×</button>
+            <div class="item-header">
+              <div class="company-role">
+                <input type="text" placeholder="Título - Universidad/Institución" class="degree-input" value="${edu.degree}" onchange="updateProgress()">
+              </div>
+              <div class="date-location">
+                <input type="text" placeholder="Ciudad, País | AAAA" class="edu-date-input" value="${edu.dates}">
+              </div>
+            </div>
+            <textarea rows="2" placeholder="Especialización, promedio, proyectos destacados (opcional)" class="edu-description-input">${edu.description}</textarea>
+          `;
+          eduContainer.appendChild(eduItem);
+        });
+
+        // Limpiar y cargar habilidades
+        const skillsContainer = document.getElementById('skillsContainer');
+        skillsContainer.innerHTML = '';
+        data.skills.forEach(skill => {
+          const skillItem = document.createElement('div');
+          skillItem.className = 'skill-item';
+          skillItem.innerHTML = `
+            <button class="skill-delete" onclick="deleteSkill(this)" title="Eliminar">×</button>
+            <div class="skill-name">
+              <input type="text" placeholder="Nombre de la habilidad" class="skill-name-input" value="${skill.name}" onchange="updateSkillName(this)">
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" style="width: ${skill.level}%"></div>
+            </div>
+            <input type="range" min="0" max="100" value="${skill.level}" class="skill-range" onchange="updateSkillLevel(this)" style="width: 100%; margin-top: 5px;">
+          `;
+          skillsContainer.appendChild(skillItem);
+        });
+
+        // Limpiar y cargar idiomas
+        const langContainer = document.getElementById('languagesContainer');
+        langContainer.innerHTML = '';
+        data.languages.forEach(lang => {
+          const langItem = document.createElement('div');
+          langItem.className = 'language-item';
+          langItem.innerHTML = `
+            <button class="language-delete" onclick="deleteLanguage(this)" title="Eliminar">×</button>
+            <input type="text" placeholder="Idioma" class="language-input" style="width: 60%;" value="${lang.name}">
+            <select class="language-level" style="background: rgba(255,255,255,0.2); border: none; color: white;">
+              <option value="Nativo" ${lang.level === 'Nativo' ? 'selected' : ''}>Nativo</option>
+              <option value="Avanzado" ${lang.level === 'Avanzado' ? 'selected' : ''}>Avanzado</option>
+              <option value="Intermedio" ${lang.level === 'Intermedio' ? 'selected' : ''}>Intermedio</option>
+              <option value="Básico" ${lang.level === 'Básico' ? 'selected' : ''}>Básico</option>
+            </select>
+          `;
+          langContainer.appendChild(langItem);
+        });
+
+        updateProgress();
+        showSuccessMessage('Datos cargados exitosamente');
+      } catch (error) {
+        alert('Error al cargar los datos: ' + error.message);
+      }
+    }
+
+    // Función para limpiar todos los datos
+    function clearAll() {
+      if (confirm('¿Estás seguro de que deseas limpiar todos los datos? Esta acción no se puede deshacer.')) {
+        // Limpiar campos principales
+        document.getElementById('fullName').value = '';
+        document.getElementById('jobTitle').value = '';
+        document.getElementById('profile').value = '';
+        document.getElementById('phone').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('location').value = '';
+        document.getElementById('linkedin').value = '';
+        document.getElementById('destinationEmail').value = 'rrhh@empresa.com';
+        document.getElementById('profileImage').src = 'https://via.placeholder.com/120/667eea/ffffff?text=FOTO';
+        document.getElementById('colorTemplate').value = 'default';
+
+        // Limpiar experiencias (dejar una vacía)
+        const expContainer = document.getElementById('experienceContainer');
+        expContainer.innerHTML = `
+          <div class="experience-item">
+            <button class="delete-item" onclick="deleteExperience(this)" title="Eliminar">×</button>
+            <div class="item-header">
+              <div class="company-role">
+                <input type="text" placeholder="Empresa - Cargo" class="company-input" onchange="updateProgress()">
+              </div>
+              <div class="date-location">
+                <input type="text" placeholder="Ciudad, País | MM/AAAA - MM/AAAA" class="date-input">
+              </div>
+            </div>
+            <textarea rows="3" placeholder="• Responsabilidades principales&#10;• Logros destacados&#10;• Proyectos relevantes" class="description-input"></textarea>
+          </div>
+        `;
+
+        // Limpiar educación (dejar una vacía)
+        const eduContainer = document.getElementById('educationContainer');
+        eduContainer.innerHTML = `
+          <div class="education-item">
+            <button class="delete-item" onclick="deleteEducation(this)" title="Eliminar">×</button>
+            <div class="item-header">
+              <div class="company-role">
+                <input type="text" placeholder="Título - Universidad/Institución" class="degree-input" onchange="updateProgress()">
+              </div>
+              <div class="date-location">
+                <input type="text" placeholder="Ciudad, País | AAAA" class="edu-date-input">
+              </div>
+            </div>
+            <textarea rows="2" placeholder="Especialización, promedio, proyectos destacados (opcional)" class="edu-description-input"></textarea>
+          </div>
+        `;
+
+        // Limpiar habilidades (dejar una vacía)
+        const skillsContainer = document.getElementById('skillsContainer');
+        skillsContainer.innerHTML = `
+          <div class="skill-item">
+            <button class="skill-delete" onclick="deleteSkill(this)" title="Eliminar">×</button>
+            <div class="skill-name">
+              <input type="text" placeholder="Nombre de la habilidad" class="skill-name-input" onchange="updateSkillName(this)">
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" style="width: 80%"></div>
+            </div>
+            <input type="range" min="0" max="100" value="80" class="skill-range" onchange="updateSkillLevel(this)" style="width: 100%; margin-top: 5px;">
+          </div>
+        `;
+
+        // Limpiar idiomas (dejar español)
+        const langContainer = document.getElementById('languagesContainer');
+        langContainer.innerHTML = `
+          <div class="language-item">
+            <button class="language-delete" onclick="deleteLanguage(this)" title="Eliminar">×</button>
+            <input type="text" placeholder="Idioma" value="Español" class="language-input" style="width: 60%;">
+            <select class="language-level" style="background: rgba(255,255,255,0.2); border: none; color: white;">
+              <option value="Nativo" selected>Nativo</option>
+              <option value="Avanzado">Avanzado</option>
+              <option value="Intermedio">Intermedio</option>
+              <option value="Básico">Básico</option>
+            </select>
+          </div>
+        `;
+
+        changeColorTemplate();
+        updateProgress();
+        showSuccessMessage('Todos los datos han sido limpiados');
+      }
+    }
+
+    // Cargar datos guardados al cargar la página
+    window.onload = function() {
+      // Animación de las barras de progreso
+      setTimeout(() => {
+        const progressBars = document.querySelectorAll('.skill-progress');
+        progressBars.forEach(bar => {
+          const width = bar.style.width;
+          bar.style.width = '0%';
+          setTimeout(() => {
+            bar.style.width = width;
+          }, 100);
+        });
+      }, 500);
+
+      // Actualizar progreso inicial
+      updateProgress();
+
+      // Auto-guardar cada 30 segundos si hay datos
+      setInterval(() => {
+        const name = document.getElementById('fullName').value;
+        if (name.trim()) {
+          saveData();
+        }
+      }, 30000);
+    };
+  </script>
+</body>
+</html>
